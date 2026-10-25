@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabe Weekly</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================
+           COLOR PALETTE & CSS VARIABLES
+           ========================================== */
+        :root {
+            --primary: #1e293b;
+            /* Deep slate navy */
+            --accent: #d97706;
+            /* Warm amber/gold accent */
+            --accent-hover: #b45309;
+            /* Darker amber */
+            --accent-soft: #fef3c7;
+            /* Soft gold background tint */
+            --bg-main: #f8fafc;
+            /* Off-white background */
+            --card-bg: #ffffff;
+            /* Pure white cards */
+            --text-main: #334155;
+            /* Main text color */
+            --text-muted: #64748b;
+            /* Muted text color */
+            --border-color: #e2e8f0;
+            /* Soft borders */
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 60px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==========================================
+           1. NAVIGATION BAR
+           ========================================== */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            margin-bottom: 30px;
+        }
+
+        .nav-container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-drive-btn {
+            background-color: var(--primary);
+            color: #ffffff !important;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600 !important;
+            transition: background-color 0.2s ease !important;
+        }
+
+        .nav-drive-btn:hover {
+            background-color: var(--accent) !important;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* ==========================================
+           2. HERO HEADER & AVATAR
+           ========================================== */
+        header.hero {
+            text-align: center;
+            padding: 10px 0 30px 0;
+        }
+
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: var(--shadow);
+            margin: 0 auto 16px auto;
+            display: block;
+        }
+
+        .issue-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        header.hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary);
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        header.hero .meta {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        header.hero .meta span {
+            margin: 0 8px;
+        }
+
+        /* ==========================================
+           3. WEEKLY SNAPSHOTS (3 IMAGES)
+           ========================================== */
+        .gallery-section {
+            margin-bottom: 40px;
+        }
+
+        .gallery-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #e2e8f0;
+            aspect-ratio: 4 / 3;
+            border: 1px solid var(--border-color);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
+            color: #ffffff;
+            padding: 24px 14px 10px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* ==========================================
+           4. MAIN STORY SECTION
+           ========================================== */
+        .main-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 36px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+
+        .main-story p {
+            font-size: 1.05rem;
+            margin-bottom: 18px;
+            color: var(--text-main);
+        }
+
+        .dropcap::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.4rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 12px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* ==========================================
+           5. BIBLE VERSE OF THE WEEK
+           ========================================== */
+        .bible-verse-card {
+            background: linear-gradient(135deg, #fffbf0 0%, #ffffff 100%);
+            border-left: 5px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .bible-verse-card .verse-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .bible-verse-card blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--primary);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .bible-verse-card .reference {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        /* ==========================================
+           5b. DAILY GRATITUDE SECTION
+           ========================================== */
+        .gratitude-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            border-top: 4px solid var(--accent);
+        }
+
+        .gratitude-intro {
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .gratitude-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .gratitude-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px 16px;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .gratitude-day {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 90px;
+            padding-top: 2px;
+        }
+
+        .gratitude-text {
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================
+           5c. SMALL WINS DAILY SECTION
+           ========================================== */
+        .wins-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            border-top: 4px solid var(--primary);
+        }
+
+        .wins-intro {
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .wins-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .wins-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px 16px;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .wins-day {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 90px;
+            padding-top: 2px;
+        }
+
+        .wins-text {
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================
+           6. INTERESTING THINGS OF THE WEEK (FLIP CARDS)
+           ========================================== */
+        .interesting-section {
+            margin-bottom: 40px;
+        }
+
+        .interesting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        /* 3D Flip Card Styles */
+        .card-container {
+            perspective: 1000px;
+            min-height: 450px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        .card-container.is-flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: #fefcf6;
+            border-color: var(--accent-soft);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 9px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+            display: block;
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .card-front h3,
+        .card-back h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .card-front p,
+        .card-back p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .card-back p {
+            color: var(--text-main);
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            align-self: flex-start;
+            transition: color 0.2s ease;
+        }
+
+        .read-more-btn:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        .card-ext-link {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .card-ext-link:hover {
+            color: var(--accent);
+        }
+
+        /* ==========================================
+           6b. INTERESTING NEWS FOR FAMILY MEMBERS
+           ========================================== */
+        .family-news-section {
+            margin-bottom: 40px;
+        }
+
+        .family-news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .family-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+
+        .family-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .family-card-image {
+            width: 100%;
+            height: 170px;
+            overflow: hidden;
+            background: #e2e8f0;
+        }
+
+        .family-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .family-card:hover .family-card-image img {
+            transform: scale(1.05);
+        }
+
+        .family-card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .family-card-body h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .family-card-body p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           7. PAST WEEKS ARCHIVE SECTION
+           ========================================== */
+        .past-weeks-section {
+            margin-bottom: 40px;
+        }
+
+        .past-weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .week-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-decoration: none;
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .week-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08);
+        }
+
+        .week-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 3px 10px;
+            border-radius: 12px;
+            align-self: flex-start;
+        }
+
+        .week-card h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+        }
+
+        .week-card .card-action {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .week-card:hover .card-action {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        /* ==========================================
+           8. GOOGLE DRIVE BANNER
+           ========================================== */
+        .drive-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: var(--radius);
+            padding: 35px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .drive-banner h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .drive-banner p {
+            color: #94a3b8;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        .btn-drive {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-drive:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .gallery-grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            header.hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .main-card {
+                padding: 24px;
+            }
+
+            .card-container {
+                min-height: 410px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. TOP NAVIGATION BAR -->
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Gabe Lee</a>
+            <ul class="nav-links">
+                <li><a href="#main-story">Reflection</a></li>
+                <li><a href="#bible-verse">Bible</a></li>
+                <li><a href="#daily-gratitude">Gratitude</a></li>
+                <li><a href="#small-wins">Wins</a></li>
+                <li><a href="#interesting-things">Interesting Things</a></li>
+                <li><a href="#family-news">Family News</a></li>
+                <li><a href="#past-weeks">Past Weeks</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1upg11lUnkvY4rhiNhHlm5BI7fytfxQUR" target="_blank" class="nav-drive-btn">Google Drive</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- 2. HERO HEADER WITH GABE'S CIRCULAR PROFILE AVATAR -->
+        <header class="hero">
+            <img src="Gabelee.jpg" alt="Gabe Lee" class="profile-avatar">
+            <span class="issue-tag">October Week #4</span>
+            <h1>Gabe Family Weekly</h1>
+            <div class="meta">
+                Written by <strong>Gabe Lee</strong> <span>•</span> Published Oct 25, 2026
+            </div>
+        </header>
+
+        <!-- 3. WEEKLY SNAPSHOTS -->
+        <section id="snapshots" class="gallery-section">
+            <h2 class="section-title">Weekly Snapshots</h2>
+
+            <div class="gallery-grid-3">
+                <div class="gallery-item">
+                    <img src="SarahLunch.JPEG" alt="Healthy Meal">
+                    <div class="gallery-caption">Sarah's surprising visit! We had lunch and smoothie. I was so happy!</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="Rayna.JPEG" alt="meet with Jenny">
+                    <div class="gallery-caption">Lunch at Rayna's House. It was yummy!</div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="Card.JPEG" alt="Exercise">
+                    <div class="gallery-caption">Cards to Sarah and Jenny.&nbsp; I hope they enjoyed what I wrote!</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. MAIN WRITING SECTION -->
+        <section id="main-story" class="main-card">
+            <h2 class="section-title">This Week's Reflection: Life, Work, and God's Blessings</h2>
+
+            <article class="main-story">
+                <p class="dropcap">
+                </p>
+                <p>I hope you enjoyed the beautiful, crisp fall weather this week! I went running several times just to enjoy the colorful trees, crystal-clear blue skies, and refreshing autumn breeze. What a wonderful time of year! I hope you also get a chance to enjoy this beautiful season before all the leaves fall to the ground.</p>
+                <p>During my runs, while listening to 93.3 FM and reflecting on Bible verses, I found myself thinking about how much I have to be thankful for. One thing that especially came to mind was how incredibly blessed I am to have a job that I truly love.</p> 
+                <p>I love being a professor! I love the freedom and flexibility that come with my job. I love interacting with students and being surrounded by young people who are experiencing one of the most exciting stages of their lives. Their smiles, energy, enthusiasm, and even their occasional immaturity, strong egos, and stubborn opinions make my days interesting. Haha! Despite all that, they are generally kind, sweet, warm, and respectful toward me. Being around them keeps me feeling young, too!</p>
+                <p>I also love having my own office, where I can sit quietly, think, read, and spend time researching topics that genuinely interest me. What makes it even more rewarding is knowing that other scholars in my field find my research valuable. Over my 21-year academic career, my research has been cited more than 10,000 times—that's an average of nearly 500 citations per year! This has contributed to my recognition among the world's top 2% of scientists. I must admit, this makes me feel very proud of what I have accomplished over the years.</p>
+                <p>I am also fortunate to work at a highly ranked business school. I have to confess that I sometimes feel a little boastful when telling others where I work. Haha!</p>
+                <p>And there are so many other things to appreciate. My salary is neither too high nor too low, but it is more than enough to provide a comfortable life for Mom and me and help support you girls. I enjoy several months of breaks from teaching each year, which I consider an incredible luxury. Even during the academic year, I have a great deal of control over my daily schedule—when to come to the office, what to work on, and how to manage my time. Not many professions offer this kind of freedom.</p>
+                <p>The more I think about all these things, the more I realize how generously God has blessed me with a profession that fits my interests, personality, and lifestyle. I am deeply grateful to Him for leading me to this career. I hope to continue doing this work for as long as my health and passion allow.</p>
+                <p>And this brings me to something I sincerely wish for both of you. I pray that each of you will eventually find a career that you genuinely love—a job that gives you satisfaction, a sense of purpose, and pride in what you do, while also filling your heart with gratitude and humility toward God.</p>
+                <p>There is no need to rush. Take your time, explore your interests, and keep praying that God will guide you toward the right path. When you discover something that truly excites you and feels meaningful, pursue it wholeheartedly.</p> 
+                <p>Of course, whatever career you choose, reaching that goal may require considerable effort, additional education or training, and sacrifices of time and money. But I believe those sacrifices can be well worth it when they lead you to something you truly love.</p> 
+                <p>Just look at my own experience. It took me about 11 years to establish myself in this profession—five years to earn my Ph.D., during which I survived on a very small paycheck, followed by another six years of hard work, pressure, and many sleepless nights to earn tenure. It certainly wasn't an easy journey! But looking back, I can confidently say that it was worth every sacrifice.</p> 
+                <p>I don't know exactly what God has planned for your careers or where He will lead you. But I sincerely hope and pray that, someday, you will look back on your own journeys and say, just as I do today, <b>"I love my job, I am happy with what I do, and I am so thankful to God for leading me here."</b></p> 
+                <p>That would make me a very happy dad.</p> 
+                <p>Enjoy this beautiful fall season, and always remember how much I love you both!</p>
+                <p>Love,</p>
+                <p>Your blessed and grateful Dad ❤️</p> 
+                </article>
+        </section>
+
+        <!-- 5. THIS WEEK'S BIBLE VERSE -->
+        <section id="bible-verse">
+            <h2 class="section-title">This Week's Bible Verse</h2>
+            <div class="bible-verse-card">
+                <span class="verse-icon">📖</span>
+                <blockquote>Consider yourselves to be dead to the power of sin and alive to God through Christ Jesus. Do not let sin control the way you live; do not give in to sinful desires.... Sin is no longer your master.... You live under the freedom of God's grace.</blockquote>
+                <div class="reference">— romans 6:11-12, 14</div>
+            </div>
+        </section>
+
+              <!-- 5b. DAILY GRATITUDE -->
+        <section id="daily-gratitude">
+            <h2 class="section-title">Daily Gratitude</h2>
+            <div class="gratitude-card">
+                <p class="gratitude-intro">"In everything give thanks..." — Keeping track of daily blessings and thank-yous throughout the week.</p>
+                <ul class="gratitude-list">
+                    <li class="gratitude-item">
+                        <span class="gratitude-day">Monday (10/19)</span>
+                        <span class="gratitude-text">Traffic was light on my way to school. I only had to stop at one traffic light.<br><br></span>
+                    </li>
+                    <li class="gratitude-item">
+                        <span class="gratitude-day">Tuesday (10/20)</span>
+                        <span class="gratitude-text">Have a fun run at OCP. 3.3 miles. Weather was very nice</span>
+                    </li>
+                    <li class="gratitude-item">
+                        <span class="gratitude-day">Wednesday (10/21)</span>
+                        <span class="gratitude-text">Brain functions well, so I could complete a couple of things.&nbsp;</span>
+                    </li>
+                    <li class="gratitude-item">
+                        <span class="gratitude-day">Thursday(10/22)</span>
+                        <span class="gratitude-text">May teach the course during j-term</span>
+                    </li>
+                    <li class="gratitude-item">
+                        <span class="gratitude-day">Friday (10/23)</span>
+                        <span class="gratitude-text">Meet Sarah, have lunch and fun time together</span>
+                    </li>
+                    <li class="gratitude-item">
+                        <span class="gratitude-day">Saturday (10/24)</span>
+                        <span class="gratitude-text">Make a bread successfully</span>
+                    </li>
+                    <li class="gratitude-item">
+                        <span class="gratitude-day">Sunday (10/25)</span>
+                        <span class="gratitude-text">My stomach issues seem to be getting better.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 5c. SMALL WINS DAILY -->
+        <section id="small-wins">
+            <h2 class="section-title">Small Wins Daily</h2>
+            <div class="wins-card">
+                <p class="wins-intro">Celebrating small victories and progress made every day of the week.</p>
+                <ul class="wins-list">
+                    <li class="wins-item">
+                        <span class="wins-day">Monday(10/19)</span>
+                        <span class="wins-text">Made a seafood pasta for dinner. I liked it, so it became one of my favorites.&nbsp;&nbsp;</span>
+                    </li>
+                    <li class="wins-item">
+                        <span class="wins-day">Tuesday(10/20)</span>
+                        <span class="wins-text">Went to bed at 11:30pm. Decided to change my sleeping pattern</span>
+                    </li>
+                    <li class="wins-item">
+                        <span class="wins-day">Wednesday (10/21)</span>
+                        <span class="wins-text">Did not want to run, but I ran. I gained some weight, so I should manage it.</span>
+                    </li>
+                    <li class="wins-item">
+                        <span class="wins-day">Thursday (10/22)</span>
+                        <span class="wins-text">Complete and submit CTE IGNITE grant report&nbsp;</span>
+                    </li>
+                    <li class="wins-item">
+                        <span class="wins-day">Friday (10/23)</span>
+                        <span class="wins-text">Lead the ME(Major Exploration) conference successfully</span>
+                    </li>
+                    <li class="wins-item">
+                        <span class="wins-day">Saturday (10/24)</span>
+                        <span class="wins-text">Write cards to Sarah and Ziqi and deliver them</span>
+                    </li>
+                    <li class="wins-item">
+                        <span class="wins-day">Sunday (10/25)</span>
+                        <span class="wins-text">Finish lots of grading</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- 6. INTERESTING THINGS OF THE WEEK -->
+        <section id="interesting-things" class="interesting-section">
+            <h2 class="section-title">Interesting Things of the Week</h2>
+
+            <div class="interesting-grid">
+
+                <!-- Item 1 Card -->
+                <div class="card-container">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div>
+                                <img src="bread.JPG" alt="Goodbye card for Christine" class="card-image">
+                                <span class="card-tag">🎙️breadmaker</span>
+                                <h3>Bread Maker is back</h3>
+                                <p>Bread maker was broken, so I returned it and got the new one. Then I made bread. haha~</p>
+                            </div>
+                            <button class="read-more-btn" onclick="toggleFlip(this)">Read More &rarr;</button>
+                        </div>
+                        <div class="card-back">
+                            <div>
+                                <span class="card-tag">🎙️ Episode Highlights</span>
+                                <h3>Deep Dive & Links</h3>
+                                <p>This episode covers how ancient agricultural festivals evolved into modern traditions. It also reveals how temperatures trigger leaf color drops.</p>
+                                <a href="#" target="_blank" class="card-ext-link">Listen to Full Episode 🎧</a>
+                            </div>
+                            <button class="read-more-btn" onclick="toggleFlip(this)">&larr; Flip Back</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 Card -->
+                <div class="card-container">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div>
+                                <img src="running.JPEG" alt="Outdoor exercise during the cooler weather" class="card-image">
+                                <span class="card-tag">💡 Run</span>
+                                <h3>Run & Run!</h3>
+                                <p>Run three days this week. Tuesday, Wednesday and Saturday.&nbsp;Total 16.9 miles. </p>
+                            </div>
+                            <button class="read-more-btn" onclick="toggleFlip(this)">Read More &rarr;</button>
+                        </div>
+                        <div class="card-back">
+                            <div>
+                                <span class="card-tag">💡 Science Detail</span>
+                                <h3>The Role of Anthocyanin</h3>
+                                <p>While yellows are always present in leaves, red pigments (anthocyanins) are produced only in autumn when trapped sugars react with sunlight!</p>
+                            </div>
+                            <button class="read-more-btn" onclick="toggleFlip(this)">&larr; Flip Back</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 Card -->
+                <div class="card-container">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div>
+                                <img src="snoopy.JPEG" alt="Healthy breakfast" class="card-image">
+                                <span class="card-tag">🍳 picture</span>
+                                <h3>Jenny's Snoopy</h3>
+                                <p>I found this from my office cabinet. Then lay down as like him and smile 😀 </p>
+                            </div>
+                            <button class="read-more-btn" onclick="toggleFlip(this)">Read More &rarr;</button>
+                        </div>
+                        <div class="card-back">
+                            <div>
+                                <span class="card-tag">🍳 Quick Recipe</span>
+                                <h3>Ingredients & Prep</h3>
+                                <p>Slice 4 Honeycrisp apples, mix with cinnamon & brown sugar. Top with rolled oats, butter, and bake at 350°F for 30 mins!</p>
+                                <a href="#" target="_blank" class="card-ext-link">View Full Recipe 📖</a>
+                            </div>
+                            <button class="read-more-btn" onclick="toggleFlip(this)">&larr; Flip Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6b. INTERESTING NEWS FOR THE FAMILY MEMBERS -->
+        <section id="family-news" class="family-news-section">
+            <h2 class="section-title">Interesting News for the Family Members</h2>
+
+            <div class="family-news-grid">
+
+                <!-- Christine's Card -->
+                <div class="family-card">
+                    <div class="family-card-image">
+                        <img src="Christine.JPEG" alt="Christine's News Photo">
+                    </div>
+                    <div class="family-card-body">
+                        <span class="card-tag">👩‍🦰 Christine</span>
+                        <h3>Anything New ?</h3>
+                        <p>Christine ...</p>
+                    </div>
+                </div>
+
+                <!-- Jenny's Card -->
+                <div class="family-card">
+                    <div class="family-card-image">
+                        <img src="Jenny.JPEG" alt="Jenny's News Photo">
+                    </div>
+                    <div class="family-card-body">
+                        <span class="card-tag">👩 Jenny</span>
+                        <h3></h3>
+                        <h3 style="color: rgb(30, 41, 59);">Anything New ?</h3>
+                        <p>Jenny...&nbsp;</p>
+                    </div>
+                </div>
+
+                <!-- Sarah's Card -->
+                <div class="family-card">
+                    <div class="family-card-image">
+                        <img src="Sarah.JPEG" alt="Sarah's News Photo">
+                    </div>
+                    <div class="family-card-body">
+                        <span class="card-tag">👧 Sarah</span>
+                        <h3></h3>
+                        <h3 style="color: rgb(30, 41, 59);">Anything New ?</h3>
+                        <p><a href="sarah.html">Click Here &rarr;</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. PAST WEEKS ARCHIVE -->
+        <section id="past-weeks" class="past-weeks-section">
+            <h2 class="section-title">Past Weeks</h2>
+
+            <div class="past-weeks-grid">
+                <a href="https://profgabelee.github.io/GabeFamilyNews10042026" class="week-card" target="_blank">
+                    <span class="week-badge">Week #1</span>
+                    <h3>October Week #1</h3>
+                    <span class="card-action">View Webpage &rarr;</span>
+                </a>
+                <a href="https://profgabelee.github.io/gabefamilynews10112026/" class="week-card" target="_blank">
+                    <span class="week-badge">Week #2</span>
+                    <h3>October Week #2</h3>
+                    <span class="card-action">View Webpage &rarr;</span>
+                </a>
+                <a href="https://profgabelee.github.io/gabefamilynews10182026/" class="week-card" target="_blank">
+                    <span class="week-badge">Week #3</span>
+                    <h3>October Week #3</h3>
+                    <span class="card-action">View Webpage &rarr;</span>
+                </a>    
+            </div>
+        </section>
+
+        <!-- 8. GOOGLE DRIVE HYPERLINK BANNER -->
+        <div id="google-drive" class="drive-banner">
+            <h3>Want to see all photo albums & videos?</h3>
+            <p>I uploaded high-resolution videos and full photo albums from this week to our shared Google Drive folder.</p>
+            <a href="https://drive.google.com/drive/folders/1upg11lUnkvY4rhiNhHlm5BI7fytfxQUR" target="_blank" class="btn-drive">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z" />
+                </svg>
+                Open Gabe Google Drive Album
+            </a>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>Created with ❤️ by <strong>Gabe Lee</strong> for the family.</p>
+            <p>Sent weekly • Have something to share for next week? Send me a text!</p>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript to toggle card flips -->
+    <script>
+        function toggleFlip(button) {
+            const cardContainer = button.closest('.card-container');
+            cardContainer.classList.toggle('is-flipped');
+        }
+    </script>
+</body>
+
+</html>
